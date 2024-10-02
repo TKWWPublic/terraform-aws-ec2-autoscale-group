@@ -5,19 +5,9 @@ data "aws_subnet" "this" {
 
 resource "aws_launch_template" "default" {
   count = module.this.enabled ? 1 : 0
-  dynamic "name_launch_template" {
-    for_each = var.name_launch_template != null ? [var.name_launch_template] : []
-    content {
-      name = var.name_launch_template
-    }
-  }
-
-  dynamic "name_prefix" {
-    for_each = var.name == null && var.name_prefix != null ? [var.name_prefix] : []
-    content {
-      name_prefix = format("%s%s", module.this.id, module.this.delimiter)
-    }
-  }
+  
+  name        = var.name_launch_template != null ? var.name_launch_template : null
+  name_prefix = var.name_launch_template == null && var.name_prefix != null ? format("%s%s", module.this.id, module.this.delimiter) : null
 
   dynamic "block_device_mappings" {
     for_each = var.block_device_mappings
@@ -166,20 +156,9 @@ locals {
 
 resource "aws_autoscaling_group" "default" {
   count = module.this.enabled ? 1 : 0
-    dynamic "name_asg" {
-    for_each = var.name_asg != null ? [var.name_asg] : []
-    content {
-      name = var.name_asg
-    }
-  }
 
-  dynamic "name_prefix" {
-    for_each = var.name == null && var.name_prefix != null ? [var.name_prefix] : []
-    content {
-      name_prefix = format("%s%s", module.this.id, module.this.delimiter)
-    }
-  }
-
+  name        = var.name_asg != null ? var.name_asg : null
+  name_prefix = var.name_asg == null && var.name_prefix != null ? format("%s%s", module.this.id, module.this.delimiter) : null
   vpc_zone_identifier       = var.network_interface_id == null ? var.subnet_ids : null
   availability_zones        = var.network_interface_id != null ? local.availability_zones : null
   max_size                  = var.max_size
