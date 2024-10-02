@@ -5,8 +5,19 @@ data "aws_subnet" "this" {
 
 resource "aws_launch_template" "default" {
   count = module.this.enabled ? 1 : 0
+  dynamic "name_launch_template" {
+    for_each = var.name_launch_template != null ? [var.name_launch_template] : []
+    content {
+      name = var.name_launch_template
+    }
+  }
 
-  name_prefix = var.name_launch_template != "" ? var.name_launch_template :format("%s%s", module.this.id, module.this.delimiter)
+  dynamic "name_prefix" {
+    for_each = var.name == null && var.name_prefix != null ? [var.name_prefix] : []
+    content {
+      name_prefix = format("%s%s", module.this.id, module.this.delimiter)
+    }
+  }
 
   dynamic "block_device_mappings" {
     for_each = var.block_device_mappings
@@ -155,8 +166,20 @@ locals {
 
 resource "aws_autoscaling_group" "default" {
   count = module.this.enabled ? 1 : 0
+    dynamic "name_asg" {
+    for_each = var.name_asg != null ? [var.name_asg] : []
+    content {
+      name = var.name_asg
+    }
+  }
 
-  name_prefix               = var.name_asg != "" ? var.name_asg : format("%s%s", module.this.id, module.this.delimiter)
+  dynamic "name_prefix" {
+    for_each = var.name == null && var.name_prefix != null ? [var.name_prefix] : []
+    content {
+      name_prefix = format("%s%s", module.this.id, module.this.delimiter)
+    }
+  }
+
   vpc_zone_identifier       = var.network_interface_id == null ? var.subnet_ids : null
   availability_zones        = var.network_interface_id != null ? local.availability_zones : null
   max_size                  = var.max_size

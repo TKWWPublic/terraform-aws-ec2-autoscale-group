@@ -164,6 +164,12 @@ variable "name_launch_template" {
   type    = string
 }
 
+variable "name_prefix" {
+  type = string
+  default = ""
+  description = "value of the id name_prefix for the autoscaling group"
+}
+
 variable "placement" {
   description = "The placement specifications of the instances"
 
