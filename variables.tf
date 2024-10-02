@@ -152,6 +152,18 @@ variable "mixed_instances_policy" {
   default = null
 }
 
+variable "name_asg" {
+  description = "value of the id name for the autoscaling group"
+  default = ""
+  type    = string
+}
+
+variable "name_launch_template" {
+  description = "value of the id name for the launch template"
+  default = ""
+  type    = string
+}
+
 variable "placement" {
   description = "The placement specifications of the instances"
 
