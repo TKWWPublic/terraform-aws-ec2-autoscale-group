@@ -6,7 +6,7 @@ data "aws_subnet" "this" {
 resource "aws_launch_template" "default" {
   count = module.this.enabled ? 1 : 0
 
-  name        = var.name_launch_template != "" ? var.name_launch_template : "${var.application}-${replace(var.region, "-", "")}-${var.role}-lt"
+  name  = var.name_launch_template != "" ? var.name_launch_template : "${var.application}-${replace(var.region, "-", "")}-${var.role}-lt"
 
   dynamic "block_device_mappings" {
     for_each = var.block_device_mappings

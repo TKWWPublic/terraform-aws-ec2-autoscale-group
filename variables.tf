@@ -1,7 +1,23 @@
+variable "application" {
+  default     = ""
+  description = "Application name"
+  type        = string
+}
+
+variable "region" {
+  description = "AWS region of the Auto Scaling Group."
+  type        = string
+}
+
 variable "image_id" {
   type        = string
   description = "The EC2 image ID to launch"
   default     = ""
+}
+
+variable "role" {
+  description = "Role of the instances in the Auto Scaling Group."
+  type        = string
 }
 
 variable "instance_initiated_shutdown_behavior" {
