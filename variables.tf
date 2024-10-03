@@ -5,6 +5,7 @@ variable "application" {
 }
 
 variable "region" {
+  default     = ""
   description = "AWS region of the Auto Scaling Group."
   type        = string
 }
@@ -16,6 +17,7 @@ variable "image_id" {
 }
 
 variable "role" {
+  default     = ""
   description = "Role of the instances in the Auto Scaling Group."
   type        = string
 }
