@@ -26,7 +26,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 locals {
   default_ec2_alarms = {
     cpu_high = {
-      alarm_name                = "${module.this.id}${module.this.delimiter}cpu${module.this.delimiter}utilization${module.this.delimiter}high"
+      alarm_name                = var.alarm_name_custom_high != "" ? var.alarm_name_custom_high : "${module.this.id}${module.this.delimiter}cpu${module.this.delimiter}utilization${module.this.delimiter}high"
       comparison_operator       = "GreaterThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_high_evaluation_periods
       metric_name               = "CPUUtilization"
@@ -44,7 +44,7 @@ locals {
       insufficient_data_actions = []
     },
     cpu_low = {
-      alarm_name                = "${module.this.id}${module.this.delimiter}cpu${module.this.delimiter}utilization${module.this.delimiter}low"
+      alarm_name                = var.alarm_name_custom_low != "" ? var.alarm_name_custom_low : "${module.this.id}${module.this.delimiter}cpu${module.this.delimiter}utilization${module.this.delimiter}low"
       comparison_operator       = "LessThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_low_evaluation_periods
       metric_name               = "CPUUtilization"
@@ -69,7 +69,7 @@ locals {
 
 resource "aws_cloudwatch_metric_alarm" "all_alarms" {
   for_each                  = local.all_alarms
-  alarm_name                = format("%s%s", "${module.this.id}${module.this.delimiter}", each.value.alarm_name)
+  alarm_name                = var.use_custom_name_alerts == true ? each.value.alarm_name : format("%s%s", "${module.this.id}${module.this.delimiter}", each.value.alarm_name)
   comparison_operator       = each.value.comparison_operator
   evaluation_periods        = each.value.evaluation_periods
   metric_name               = each.value.metric_name

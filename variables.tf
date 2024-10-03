@@ -530,3 +530,22 @@ variable "instance_reuse_policy" {
   description = "If warm pool and this block are configured, instances in the Auto Scaling group can be returned to the warm pool on scale in. The default is to terminate instances in the Auto Scaling group when the group scales in."
   default     = null
 }
+
+
+variable "use_custom_name_alerts" {
+  type        = bool
+  description = "Set to true to use custom names for CloudWatch alarms."
+  default     = false
+}
+
+variable "alarm_name_custom_high" {
+  type        = string
+  description = "The name of the CloudWatch alarm for high CPU utilization."
+  default     = ""
+}
+
+variable "alarm_name_custom_low" {
+  type        = string
+  description = "The name of the CloudWatch alarm for low CPU utilization."
+  default     = ""
+}
