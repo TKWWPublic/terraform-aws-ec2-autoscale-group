@@ -152,18 +152,6 @@ variable "mixed_instances_policy" {
   default = null
 }
 
-variable "name_autoscaling" {
-  description = "value of the id name for the autoscaling group"
-  default = ""
-  type    = string
-}
-
-variable "name_launch_template" {
-  description = "value of the id name for the launch template"
-  default = ""
-  type    = string
-}
-
 variable "placement" {
   description = "The placement specifications of the instances"
 
@@ -531,46 +519,56 @@ variable "instance_reuse_policy" {
   default     = null
 }
 
-
-variable "use_custom_name_alerts" {
-  type        = bool
-  description = "Set to true to use custom names for CloudWatch alarms."
-  default     = false
-}
-
-variable "alarm_name_custom_high" {
-  type        = string
-  description = "The name of the CloudWatch alarm for high CPU utilization."
-  default     = ""
-}
-
-variable "alarm_name_custom_low" {
-  type        = string
-  description = "The name of the CloudWatch alarm for low CPU utilization."
-  default     = ""
-}
-
-variable "name_custom_policy_scale_up" {
-  type        = string
-  description = "The name of the scaling policy for scaling up."
-  default     = ""
-}
-
-variable "name_custom_policy_scale_down" {
-  type        = string
-  description = "The name of the scaling policy for scaling down."
-  default     = ""
-}
-
-
 variable "alarm_comparison_operator_cpu_high" {
-  type        = string
-  description = "The comparison operator for the high CPU utilization alarm."
   default     = ""
+  description = "The comparison operator for the high CPU utilization alarm."
+  type        = string
 }
 
 variable "alarm_comparison_operator_cpu_low" {
-  type        = string
-  description = "The comparison operator for the low CPU utilization alarm."
   default     = ""
+  description = "The comparison operator for the low CPU utilization alarm."
+  type        = string
+}
+
+variable "alarm_name_custom_high" {
+  default     = ""
+  description = "The name of the CloudWatch alarm for high CPU utilization."
+  type        = string
+}
+
+variable "alarm_name_custom_low" {
+  default     = ""
+  description = "The name of the CloudWatch alarm for low CPU utilization."
+  type        = string
+}
+
+variable "name_autoscaling" {
+  description = "value of the id name for the autoscaling group"
+  default = ""
+  type    = string
+}
+
+variable "name_custom_policy_scale_down" {
+  default     = ""
+  description = "The name of the scaling policy for scaling down."
+  type        = string
+}
+
+variable "name_custom_policy_scale_up" {
+  default     = ""
+  description = "The name of the scaling policy for scaling up."
+  type        = string
+}
+
+variable "name_launch_template" {
+  description = "value of the id name for the launch template"
+  default = ""
+  type    = string
+}
+
+variable "use_custom_name_alerts" {
+  default     = false
+  description = "Set to true to use custom names for CloudWatch alarms."
+  type        = bool
 }
