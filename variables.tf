@@ -561,3 +561,16 @@ variable "name_custom_policy_scale_down" {
   description = "The name of the scaling policy for scaling down."
   default     = ""
 }
+
+
+variable "alarm_comparison_operator_cpu_high" {
+  type        = string
+  description = "The comparison operator for the high CPU utilization alarm."
+  default     = ""
+}
+
+variable "alarm_comparison_operator_cpu_low" {
+  type        = string
+  description = "The comparison operator for the low CPU utilization alarm."
+  default     = ""
+}

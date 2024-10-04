@@ -27,7 +27,7 @@ locals {
   default_ec2_alarms = {
     cpu_high = {
       alarm_name                = var.alarm_name_custom_high != "" ? var.alarm_name_custom_high : "${module.this.id}${module.this.delimiter}cpu${module.this.delimiter}utilization${module.this.delimiter}high"
-      comparison_operator       = "GreaterThanOrEqualToThreshold"
+      comparison_operator       = var.alarm_comparison_operator_cpu_high != "" ? var.alarm_comparison_operator_cpu_high : "GreaterThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_high_evaluation_periods
       metric_name               = "CPUUtilization"
       namespace                 = "AWS/EC2"
@@ -45,7 +45,7 @@ locals {
     },
     cpu_low = {
       alarm_name                = var.alarm_name_custom_low != "" ? var.alarm_name_custom_low : "${module.this.id}${module.this.delimiter}cpu${module.this.delimiter}utilization${module.this.delimiter}low"
-      comparison_operator       = "LessThanOrEqualToThreshold"
+      comparison_operator       = var.alarm_comparison_operator_cpu_low != "" ? var.alarm_comparison_operator_cpu_low : "LessThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_low_evaluation_periods
       metric_name               = "CPUUtilization"
       namespace                 = "AWS/EC2"
