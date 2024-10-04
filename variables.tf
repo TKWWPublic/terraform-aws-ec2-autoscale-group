@@ -549,3 +549,15 @@ variable "alarm_name_custom_low" {
   description = "The name of the CloudWatch alarm for low CPU utilization."
   default     = ""
 }
+
+variable "name_custom_policy_scale_up" {
+  type        = string
+  description = "The name of the scaling policy for scaling up."
+  default     = ""
+}
+
+variable "name_custom_policy_scale_down" {
+  type        = string
+  description = "The name of the scaling policy for scaling down."
+  default     = ""
+}

@@ -5,7 +5,7 @@ locals {
 
 resource "aws_autoscaling_policy" "scale_up" {
   count                  = local.autoscaling_enabled ? 1 : 0
-  name                   = "${module.this.id}${module.this.delimiter}scale${module.this.delimiter}up"
+  name                   = var.name_custom_policy_scale_up != "" ? var.name_custom_policy_scale_up :"${module.this.id}${module.this.delimiter}scale${module.this.delimiter}up"
   scaling_adjustment     = var.scale_up_scaling_adjustment
   adjustment_type        = var.scale_up_adjustment_type
   policy_type            = var.scale_up_policy_type
@@ -15,7 +15,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 
 resource "aws_autoscaling_policy" "scale_down" {
   count                  = local.autoscaling_enabled ? 1 : 0
-  name                   = "${module.this.id}${module.this.delimiter}scale${module.this.delimiter}down"
+  name                   = var.name_custom_policy_scale_down != "" ? var.name_custom_policy_scale_down : "${module.this.id}${module.this.delimiter}scale${module.this.delimiter}down"
   scaling_adjustment     = var.scale_down_scaling_adjustment
   adjustment_type        = var.scale_down_adjustment_type
   policy_type            = var.scale_down_policy_type
