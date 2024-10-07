@@ -34,9 +34,9 @@ variable "security_group_ids" {
 }
 
 variable "launch_template_version" {
-  type        = string
-  description = "Launch template version. Can be version number, `$Latest` or `$Default`"
   default     = "$Latest"
+  description = "Launch template version. Can be version number, `$Latest` or `$Default`"
+  type        = string
 }
 
 variable "associate_public_ip_address" {
