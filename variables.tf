@@ -34,9 +34,9 @@ variable "security_group_ids" {
 }
 
 variable "launch_template_version" {
-  type        = string
-  description = "Launch template version. Can be version number, `$Latest` or `$Default`"
   default     = "$Latest"
+  description = "Launch template version. Can be version number, `$Latest` or `$Default`"
+  type        = string
 }
 
 variable "associate_public_ip_address" {
@@ -517,4 +517,58 @@ variable "instance_reuse_policy" {
   })
   description = "If warm pool and this block are configured, instances in the Auto Scaling group can be returned to the warm pool on scale in. The default is to terminate instances in the Auto Scaling group when the group scales in."
   default     = null
+}
+
+variable "alarm_comparison_operator_cpu_high" {
+  default     = ""
+  description = "The comparison operator for the high CPU utilization alarm."
+  type        = string
+}
+
+variable "alarm_comparison_operator_cpu_low" {
+  default     = ""
+  description = "The comparison operator for the low CPU utilization alarm."
+  type        = string
+}
+
+variable "alarm_name_custom_high" {
+  default     = ""
+  description = "The name of the CloudWatch alarm for high CPU utilization."
+  type        = string
+}
+
+variable "alarm_name_custom_low" {
+  default     = ""
+  description = "The name of the CloudWatch alarm for low CPU utilization."
+  type        = string
+}
+
+variable "name_autoscaling" {
+  description = "value of the id name for the autoscaling group"
+  default = ""
+  type    = string
+}
+
+variable "name_custom_policy_scale_down" {
+  default     = ""
+  description = "The name of the scaling policy for scaling down."
+  type        = string
+}
+
+variable "name_custom_policy_scale_up" {
+  default     = ""
+  description = "The name of the scaling policy for scaling up."
+  type        = string
+}
+
+variable "name_launch_template" {
+  description = "value of the id name for the launch template"
+  default = ""
+  type    = string
+}
+
+variable "use_custom_name_alerts" {
+  default     = false
+  description = "Set to true to use custom names for CloudWatch alarms."
+  type        = bool
 }
