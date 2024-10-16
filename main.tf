@@ -71,8 +71,9 @@ resource "aws_launch_template" "default" {
     }
   }
 
-  instance_type = var.instance_type
-  key_name      = var.key_name
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = var.vpc_security_group_ids
 
   dynamic "placement" {
     for_each = var.placement != null ? [var.placement] : []
