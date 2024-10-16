@@ -547,7 +547,6 @@ variable "autoscaling_group_efs_tag" {
   default     = {}
   description = "A map of tags to add to the autoscaling group for EFS"
   type        = map(string)
-  
 }
 
 variable "name_autoscaling" {
