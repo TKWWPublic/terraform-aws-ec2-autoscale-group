@@ -543,6 +543,12 @@ variable "alarm_name_custom_low" {
   type        = string
 }
 
+variable "autoscaling_group_efs_tag" {
+  description = "A map of tags to add to the autoscaling group for EFS"
+  type        = map(string)
+  default     = {}
+}
+
 variable "name_autoscaling" {
   description = "value of the id name for the autoscaling group"
   default = ""

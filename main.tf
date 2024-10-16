@@ -151,6 +151,10 @@ locals {
     for key, value in module.this.tags :
     key => value if value != "" && value != null
   }
+  combined_tags = merge(
+    local.tags,
+    var.autoscaling_group_efs_tag
+  )
 }
 
 resource "aws_autoscaling_group" "default" {
@@ -266,7 +270,7 @@ resource "aws_autoscaling_group" "default" {
   }
 
   dynamic "tag" {
-    for_each = local.tags
+    for_each = local.combined_tags
     content {
       key                 = tag.key
       value               = tag.value
