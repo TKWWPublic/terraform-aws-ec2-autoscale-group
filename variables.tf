@@ -572,9 +572,3 @@ variable "use_custom_name_alerts" {
   description = "Set to true to use custom names for CloudWatch alarms."
   type        = bool
 }
-
-variable "vpc_security_group_ids" {
-  default = []
-  type    = list(string)
-  description = "value of the security group id"
-}
